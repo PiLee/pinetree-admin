@@ -1,6 +1,6 @@
 <template lang="jade">
 div
-  h1 发布
+  h1 编辑
   p
     label 标题
     input.post-title(type="text", v-model="post.title")
@@ -16,7 +16,8 @@ div
 </template>
 
 <script>
-import {postArticle} from '../vuex/actions'
+import {article} from '../vuex/getters'
+import {getArticle, postArticle} from '../vuex/actions'
 import marked from 'marked'
 
 marked.setOptions({
@@ -33,22 +34,23 @@ marked.setOptions({
 export default {
   data () {
     return {
-      post: {
-        content: '',
-        preview: ''
-      }
+
     }
   },
   vuex: {
+    getters: {
+      post: article
+    },
     actions: {
+      getArticle: getArticle,
       postArticle: postArticle
     }
   },
   methods: {
     submit () {
-      this.postArticle(this.post, (response) => {
+      this.updateArticle(this.post, (response) => {
         if (response) {
-          console.log('发布成功')
+          console.log('编辑成功')
         }
       })
     }
@@ -57,6 +59,9 @@ export default {
     'post.content': function () {
       this.post.preview = marked(this.post.content)
     }
+  },
+  created () {
+    this.getArticle(this.$route.params.id)
   }
 }
 </script>

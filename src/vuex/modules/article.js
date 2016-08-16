@@ -6,6 +6,7 @@ const state = {
   title: '',
   content: '',
   author: '',
+  summary: '',
   createTime: ''
 }
 
@@ -14,6 +15,7 @@ const mutations = {
     state.content = data.content
     state.title = data.title
     state.author = data.author
+    state.summary = data.summary
     state.createTime = moment(data.createTime).format('LL')
   }
 }

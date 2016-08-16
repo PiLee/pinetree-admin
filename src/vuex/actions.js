@@ -9,13 +9,14 @@ export const getArticleList = function ({ dispatch }) {
 
 export const getArticle = function ({ dispatch }, id) {
   this.$http.get(API_ROOT + 'api/article/' + id).then(response => {
+    console.log(JSON.parse(response.body))
     dispatch(types.GET_ARTICLE, JSON.parse(response.body))
   })
 }
 
-export const postArticle = function ({ dispatch }, data) {
+export const postArticle = function ({ dispatch }, data, callback) {
   this.$http.post(API_ROOT + 'api/post/', data).then(response => {
-    console.log(JSON.parse(response.body))
-    // dispatch(types.POST_ARTICLE, JSON.parse(response.body))
+    if (response.ok) dispatch(types.POST_ARTICLE, data)
+    callback(response.ok)
   })
 }

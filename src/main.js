@@ -22,6 +22,22 @@ router.map({
     component: function (resolve) {
       require(['./components/Post'], resolve)
     }
+  },
+  '/manage': {
+    component: function (resolve) {
+      require(['./components/Manage'], resolve)
+    }
+  },
+  '/manage/article': {
+    component: function (resolve) {
+      require(['./components/ArticleManage'], resolve)
+    }
+  },
+  '/post-edit/:id': {
+    name: 'post-edit',
+    component: function (resolve) {
+      require(['./components/PostEdit'], resolve)
+    }
   }
 })
 

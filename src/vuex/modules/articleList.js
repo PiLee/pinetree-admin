@@ -1,4 +1,4 @@
-import {GET_ARTICLE_LIST} from '../mutation-types.js'
+import {GET_ARTICLE_LIST, POST_ARTICLE} from '../mutation-types.js'
 import moment from 'moment'
 moment.locale('zh-cn')
 
@@ -12,6 +12,9 @@ const mutations = {
       items[i].createTime = moment(items[i].createTime).startOf('day').fromNow()
     }
     state.articleList = items
+  },
+  [POST_ARTICLE] (state, data) {
+    state.articleList.push(data)
   }
 }
 
