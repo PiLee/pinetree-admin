@@ -3,13 +3,13 @@ div
   h1 编辑
   p
     label 标题
-    input.post-title(type="text", v-model="post.title")
+    input.post-title(type="text", :value="post.title", name="title", @input="modify")
   p
     label 概要
-    textarea.post-summary(v-model="post.summary")
+    textarea.post-summary(:value="post.summary", name="summary", @input="modify")
   p
     label 正文
-    textarea.post-content(v-model="post.content")
+    textarea.post-content(:value="post.content", name="content", @input="modify")
   div.post-preview(v-html="post.preview")
   p
     button(@click="submit()") 提交
@@ -17,7 +17,7 @@ div
 
 <script>
 import {article} from '../vuex/getters'
-import {getArticle, postArticle} from '../vuex/actions'
+import {getArticle, postArticle, modifyArticle, updateArticle} from '../vuex/actions'
 import marked from 'marked'
 
 marked.setOptions({
@@ -42,17 +42,24 @@ export default {
       post: article
     },
     actions: {
-      getArticle: getArticle,
-      postArticle: postArticle
+      getArticle,
+      postArticle,
+      modifyArticle,
+      updateArticle
     }
   },
   methods: {
     submit () {
-      this.updateArticle(this.post, (response) => {
+      this.updateArticle(this.$route.params.id, this.post, (response) => {
         if (response) {
           console.log('编辑成功')
         }
       })
+    },
+    modify (e) {
+      var target = e.target.name
+      var newValue = e.target.value
+      this.modifyArticle(target, newValue)
     }
   },
   watch: {

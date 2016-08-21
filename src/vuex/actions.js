@@ -16,7 +16,18 @@ export const getArticle = function ({ dispatch }, id) {
 
 export const postArticle = function ({ dispatch }, data, callback) {
   this.$http.post(API_ROOT + 'api/post/', data).then(response => {
-    if (response.ok) dispatch(types.POST_ARTICLE, data)
+    dispatch(types.POST_ARTICLE, data)
+    callback(response.ok)
+  })
+}
+
+export const modifyArticle = function ({ dispatch }, target, value, callback) {
+  dispatch(types.MODIFY_ARTICLE, target, value)
+}
+
+export const updateArticle = function ({ dispatch }, id, data, callback) {
+  this.$http.post(API_ROOT + 'api/ariticle-update/' + id, data).then(response => {
+    dispatch(types.POST_ARTICLE, data)
     callback(response.ok)
   })
 }
