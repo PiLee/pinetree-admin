@@ -1,4 +1,4 @@
-import {GET_ARTICLE_LIST, POST_ARTICLE} from '../mutation-types.js'
+import {GET_ARTICLE_LIST, POST_ARTICLE, REMOVE_ARTICLE} from '../mutation-types.js'
 import moment from 'moment'
 moment.locale('zh-cn')
 
@@ -15,6 +15,8 @@ const mutations = {
   },
   [POST_ARTICLE] (state, data) {
     state.articleList.push(data)
+  },
+  [REMOVE_ARTICLE] (state, data) {
   }
 }
 

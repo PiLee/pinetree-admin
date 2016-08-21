@@ -27,7 +27,14 @@ export const modifyArticle = function ({ dispatch }, target, value, callback) {
 
 export const updateArticle = function ({ dispatch }, id, data, callback) {
   this.$http.post(API_ROOT + 'api/ariticle-update/' + id, data).then(response => {
-    dispatch(types.POST_ARTICLE, data)
+    dispatch(types.UPDATE_ARTICLE, data)
     callback(response.ok)
+  })
+}
+
+export const removeArticle = function ({ dispatch }, id, callback) {
+  this.$http.post(API_ROOT + 'api/ariticle-remove/' + id).then(response => {
+    // dispatch(types.REMOVE_ARTICLE, id)
+    // callback(response.ok)
   })
 }
