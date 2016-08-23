@@ -1,5 +1,5 @@
 import * as types from './mutation-types'
-const API_ROOT = 'http://myvb:3088/'
+import { API_ROOT } from '../config'
 
 export const getArticleList = function ({ dispatch }) {
   this.$http.get(API_ROOT + 'api/article-list').then(response => {
@@ -33,8 +33,8 @@ export const updateArticle = function ({ dispatch }, id, data, callback) {
 }
 
 export const removeArticle = function ({ dispatch }, id, callback) {
-  this.$http.post(API_ROOT + 'api/ariticle-remove/' + id).then(response => {
-    // dispatch(types.REMOVE_ARTICLE, id)
-    // callback(response.ok)
+  this.$http.post(API_ROOT + 'api/ariticle-remove/' + id, {}).then(response => {
+    dispatch(types.REMOVE_ARTICLE, id)
+    callback(response.ok)
   })
 }

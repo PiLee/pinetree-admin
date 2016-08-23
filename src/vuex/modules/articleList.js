@@ -16,7 +16,13 @@ const mutations = {
   [POST_ARTICLE] (state, data) {
     state.articleList.push(data)
   },
-  [REMOVE_ARTICLE] (state, data) {
+  [REMOVE_ARTICLE] (state, id) {
+    for (let i = 0, len = state.articleList.length; i < len; i++) {
+      if (state.articleList[i]._id === id) {
+        state.articleList.splice(i, 1)
+        break
+      }
+    }
   }
 }
 

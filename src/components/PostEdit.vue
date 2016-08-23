@@ -50,7 +50,7 @@ export default {
   },
   methods: {
     submit () {
-      this.updateArticle(this.$route.params.id, this.post, (response) => {
+      this.updateArticle(this.$route.params.id, this.post, response => {
         if (response) {
           console.log('编辑成功')
         }

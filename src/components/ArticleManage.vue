@@ -21,7 +21,11 @@ export default {
   },
   methods: {
     remove (id) {
-      this.removeArticle(id)
+      this.removeArticle(id, response => {
+        if (response) {
+          console.log('删除成功')
+        }
+      })
     }
   },
   created () {
